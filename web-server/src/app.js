@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const publicDirPath = path.join(__dirname, '../public')
 
+app.set('view engine', 'hbs');
 app.use(express.static(publicDirPath))
 
 app.get('/weather', (req, res) => {
