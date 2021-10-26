@@ -51,28 +51,17 @@ app.get('/weather', (req, res) => {
 
     geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
         if (error) {
-            return res.send({
-                error: error.message
-            })
+            return res.send({ error });
         }
 
         forecast(latitude, longitude, (error, data) => {
             if (error) {
-                return res.send({
-                    error: error.message
-                })
+                return res.send({ error });
             }
 
-            if (!data) {
-                return res.send({
-                    error: "Can't find location by given address"
-                })
-            }
-
-            const forecastMsg = `${data.weather_descriptions}. It is currently ${data.temperature} degrees out. It feels like ${data.feelslike} degrees out`;
             res.send({
-                forecast: forecastMsg,
-                location: location,
+                forecast: data.message,
+                location,
                 address: req.query.address
             })
         })

@@ -9,11 +9,13 @@ module.exports = function forecast(latitude, longitude, callback) {
         } else if (body.error) {
             callback('Unable to find location', undefined)
         } else {
-            callback(undefined, {
+            const data = {
                 temperature: body.current.temperature,
                 feelslike: body.current.feelslike,
                 weather_descriptions: body.current.weather_descriptions[0]
-            })
+            }
+            data.message = `${data.weather_descriptions}. It is currently ${data.temperature} degrees out. It feels like ${data.feelslike} degrees out`;
+            callback(undefined, data)
         }
     })
 }
