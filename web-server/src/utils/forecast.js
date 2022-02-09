@@ -12,9 +12,10 @@ module.exports = function forecast(latitude, longitude, callback) {
             const data = {
                 temperature: body.current.temperature,
                 feelslike: body.current.feelslike,
-                weather_descriptions: body.current.weather_descriptions[0]
+                weather_descriptions: body.current.weather_descriptions[0],
+                humidity: body.current.humidity
             }
-            data.message = `${data.weather_descriptions}. It is currently ${data.temperature} degrees out. It feels like ${data.feelslike} degrees out`;
+            data.message = `${data.weather_descriptions}. It is currently ${data.temperature} degrees out. It feels like ${data.feelslike} degrees out. Humidity is ${data.humidity}%`;
             callback(undefined, data)
         }
     })
